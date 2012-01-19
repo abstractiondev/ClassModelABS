@@ -83,9 +83,11 @@ namespace ClassModel_v1_0 {
         
         private PropertyType[] propertiesField;
         
+        private MethodType[] methodsField;
+        
         private string nameField;
         
-        private bool sankoDemoLuokkaField;
+        private string designDescField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Property", IsNullable=false)]
@@ -95,6 +97,17 @@ namespace ClassModel_v1_0 {
             }
             set {
                 this.propertiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Method", IsNullable=false)]
+        public MethodType[] Methods {
+            get {
+                return this.methodsField;
+            }
+            set {
+                this.methodsField = value;
             }
         }
         
@@ -111,12 +124,12 @@ namespace ClassModel_v1_0 {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool sankoDemoLuokka {
+        public string designDesc {
             get {
-                return this.sankoDemoLuokkaField;
+                return this.designDescField;
             }
             set {
-                this.sankoDemoLuokkaField = value;
+                this.designDescField = value;
             }
         }
     }
@@ -170,6 +183,94 @@ namespace ClassModel_v1_0 {
             }
             set {
                 this.isAutoPropertyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/XMLSchema1.xsd")]
+    public partial class ImplementationType {
+        
+        private ImplementationTypeLanguage languageField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ImplementationTypeLanguage language {
+            get {
+                return this.languageField;
+            }
+            set {
+                this.languageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/XMLSchema1.xsd")]
+    public enum ImplementationTypeLanguage {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("C#")]
+        C,
+        
+        /// <remarks/>
+        Java,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("C++")]
+        C1,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/XMLSchema1.xsd")]
+    public partial class MethodType {
+        
+        private ImplementationType[] implementationField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Implementation")]
+        public ImplementationType[] Implementation {
+            get {
+                return this.implementationField;
+            }
+            set {
+                this.implementationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
             }
         }
     }

@@ -47,24 +47,47 @@
 			<#+
 		foreach(var classItem in classes.Class)
 		{
-			if(classItem.sankoDemoLuokka)
-			{
-			#>
-			public partial class <#= classItem.name #> {
-			}
-			<#+
-			}
-			else {
 			#>
 			public partial class <#= classItem.name #> {
 				<#+ GenerateProperties(classItem.Properties); #>
+				<#+ GenerateMethods(classItem.Methods); #>
 			}
 			<#+
-			}
 		}
 			#>
 		}
 		<#+
+	}
+	
+	void GenerateMethods(MethodType[] methods)
+	{
+		if(methods == null)
+			return;
+		foreach(MethodType method in methods)
+		{
+			if(method.Implementation != null)
+			{
+				GenerateMethodWithImplementation(method);
+			} else {
+				GenerateMethod(method);
+			}
+		}
+	}
+	
+	void GenerateMethodWithImplementation(MethodType method)
+	{
+		ImplementationType outputToGenerate = method.Implementation.FirstOrDefault(impl => impl.language == ImplementationTypeLanguage.C1);
+		if(outputToGenerate == null)
+			return;
+		#>
+		<#= outputToGenerate.Value ?? "" #>
+		<#+
+
+	}
+	
+	void GenerateMethod(MethodType method)
+	{
+		throw new NotSupportedException("Methods without implementation not yet supported");
 	}
 	
 	void GenerateProperties(PropertyType[] properties)
