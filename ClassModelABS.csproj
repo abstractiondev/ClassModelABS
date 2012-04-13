@@ -56,6 +56,9 @@
       <Generator>T4ScriptFileGenerator</Generator>
       <LastGenOutput>ClassModel_v1_0.tt</LastGenOutput>
     </None>
+    <None Include="ClassModel\JavaScriptClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
     <None Include="ClassModel\CSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
