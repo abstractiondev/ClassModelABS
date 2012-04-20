@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassModel\ClassModel_v1_0_namespace.cs" />
+    <Compile Include="ClassModel\CSharpClassGenerator_v1_0.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClassModel\JavaScriptClassGenerator_v1_0.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JavaScriptClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +68,12 @@
       <LastGenOutput>ClassModel_v1_0.tt</LastGenOutput>
     </None>
     <None Include="ClassModel\JavaScriptClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>JavaScriptClassGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="ClassModel\CSharpClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CSharpClassGenerator_v1_0.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
