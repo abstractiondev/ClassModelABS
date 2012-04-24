@@ -32,7 +32,8 @@ namespace ClassModelABS.ClassModel
             #line 18 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
    
 	// Set abstraction specific type and single file specific extension
-	TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
+	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.js");	
+	GenerateRoot();
 
             
             #line default
@@ -52,8 +53,22 @@ namespace ClassModelABS.ClassModel
             }
         }
         
-        #line 22 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 23 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
  
+	public Tuple<string, string>[] GetGeneratorContent(params string[] xmlFileNames)
+	{
+		List<Tuple<string, string>> result = new List<Tuple<string, string>>();
+		foreach(string xmlFileName in xmlFileNames)
+		{
+			ClassModelAbstractionType abs = LoadXml<ClassModelAbstractionType>(xmlFileName);
+			CurrentAbstraction = abs;
+			string content = TransformText();
+			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".designer.js";
+			result.Add(Tuple.Create(outputFile, content));
+		}
+		return result.ToArray();
+	}
+	
 	void SetCurrentAbstraction(object abs)
 	{
 		CurrentAbstraction = ( ClassModelAbstractionType ) abs;
@@ -79,28 +94,28 @@ namespace ClassModelABS.ClassModel
         #line default
         #line hidden
         
-        #line 43 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 58 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\t\tusing System;\r\n\r\n\t\tnamespace ");
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 61 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(classes.namespaceName));
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 61 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" {\r\n\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 47 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 62 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 		foreach(var classItem in classes.Class)
 		{
@@ -109,54 +124,54 @@ this.Write(" {\r\n\t\t\t");
         #line default
         #line hidden
         
-        #line 50 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 65 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\tpublic partial class ");
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 66 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(classItem.name));
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 66 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" {\r\n\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 67 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
  GenerateProperties(classItem.Properties); 
         
         #line default
         #line hidden
         
-        #line 52 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 67 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 53 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 68 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
  GenerateMethods(classItem.Methods); 
         
         #line default
         #line hidden
         
-        #line 53 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 68 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\t}\r\n\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 55 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 70 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 		}
 			
@@ -164,14 +179,14 @@ this.Write("\t\t\t}\r\n\t\t\t");
         #line default
         #line hidden
         
-        #line 57 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 72 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t}\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 59 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 74 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 	}
 	
@@ -200,28 +215,28 @@ this.Write("\t\t}\r\n\t\t");
         #line default
         #line hidden
         
-        #line 82 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 97 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t");
 
         
         #line default
         #line hidden
         
-        #line 83 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 98 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(outputToGenerate.Value ?? ""));
 
         
         #line default
         #line hidden
         
-        #line 83 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 98 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 84 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 99 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 
 	}
@@ -244,42 +259,42 @@ this.Write("\r\n\t\t");
         #line default
         #line hidden
         
-        #line 101 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 116 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 117 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.dataType));
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 117 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 117 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.name));
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 117 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 103 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 118 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 			} else
 			{
@@ -288,70 +303,70 @@ this.Write(" { get; set; }\r\n\t\t");
         #line default
         #line hidden
         
-        #line 106 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 121 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 122 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.dataType));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 122 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 122 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.name));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 122 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(" \r\n\t\t\t{ \r\n\t\t\t\tget { return ");
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 124 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.name));
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 124 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("Getteri(this); }\r\n\t\t\t\tset { ");
 
         
         #line default
         #line hidden
         
-        #line 110 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 125 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(prop.name));
 
         
         #line default
         #line hidden
         
-        #line 110 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 125 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 this.Write("Setteri(value); }\r\n\t\t\t}\r\n\t\t\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 113 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
+        #line 128 "C:\work\abs\Caloom\Abstractions\ClassModelABS\ClassModel\JavaScriptClassGenerator_v1_0.tt"
 
 			}
 		}
